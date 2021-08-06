@@ -15,6 +15,8 @@ class KNN:
         return np.array([self._predict(x) for x in X])
     
     def _predict(self, x: np.ndarray) -> int:
+        # p=2 minkowski metric is euclidian distance
         distances = [distance.minkowski(x, x_train, p=2) for x_train in self.X_train]
+        # get k nearest neighbors and return the majority class vote
         k_neighbor_labels = [self.y_train[i] for i in np.argsort(distances)[: self.k]]
         return Counter(k_neighbor_labels).most_common(1)[0][0]
