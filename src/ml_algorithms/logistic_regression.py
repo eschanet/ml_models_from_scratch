@@ -1,33 +1,17 @@
 import numpy as np
 from typing import List
 
-class LogisticRegression:
+from .base_regression import BaseRegression
 
-    def __init__(self, lr: float = 0.001, n_iters: int = 1000):
-        self.lr = lr
-        self.n_iters = n_iters
-        self.weights = None
-        self.bias = None
+class LogisticRegression(BaseRegression):
 
-    def fit(self, X: np.ndarray, y: np.array):
-        n_samples, n_features = X.shape
-        self.weights, self.bias = np.zeros(n_features), 0
+    def _approximation(self, X: np.ndarray, w: np.array, b: float):
+        linear_model = np.dot(X, w) + b
+        return self._sigmoid(linear_model)
 
-        # gradient descent
-        for _ in range(self.n_iters):
-            linear_model = np.dot(X, self.weights) + self.bias
-            y_predicted = self._sigmoid(linear_model)
-
-            dw = (1.0 / n_samples) * np.dot(X.T, (y_predicted - y))
-            db = (1.0 / n_samples) * np.sum(y_predicted - y)
-
-            self.weights -= self.lr * dw
-            self.bias -= self.lr * db
-
-    def predict(self, X: np.ndarray) -> np.array:
-        linear_model = np.dot(X, self.weights) + self.bias
+    def _predict(self, X: np.ndarray, w: np.array, b: float):
+        linear_model = np.dot(X, w) + b
         y_predicted = self._sigmoid(linear_model)
-
         return np.array([1 if p > 0.05 else 0 for p in y_predicted])
 
     def _sigmoid(self, x: np.array) -> np.array:
