@@ -5,4 +5,8 @@ This repository implements a couple of machine learning algorithms from scratch.
 ### Algorithms implemented
 
 - KNN
+- Linear Regression
+- Logistic Regression
+- Naive Bayes
+- Perceptron
 
