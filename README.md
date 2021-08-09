@@ -10,3 +10,13 @@ This repository implements a couple of machine learning algorithms from scratch.
 - Naive Bayes
 - Perceptron
 
+
+### How to setup
+
+Clone this repository and then setup locally with `pip` from within the `ml_models_from_scratch` directory
+```py
+cd ml_models_from_scratch/
+python3 -m pip install .
+```
+
+
